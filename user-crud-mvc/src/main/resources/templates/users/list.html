@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+  The page that shows all users.  PROVIDED - students do not need to change it.
+
+  It uses the model attribute "users" that listUsers() puts into the Model.
+  th:each = repeat the row for every user.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page">
+    <h1>Users</h1>
+
+    <p><a class="button" th:href="@{/users/new}">Add user</a></p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">1</td>
+            <td th:text="${user.firstName}">John</td>
+            <td th:text="${user.lastName}">Smith</td>
+            <td th:text="${user.email}">john@test.com</td>
+            <td th:text="${user.age}">25</td>
+            <td class="actions">
+                <a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a>
+                <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post"
+                      onsubmit="return confirm('Delete this user?');">
+                    <button type="submit" class="danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="empty" th:if="${#lists.isEmpty(users)}">There are no users yet.</p>
+</div>
+</body>
+</html>

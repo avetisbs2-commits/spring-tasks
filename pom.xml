@@ -18,6 +18,7 @@
 
     <modules>
         <module>user-crud-rest</module>
+        <module>user-crud-mvc</module>
     </modules>
 
     <properties>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+  The form for a new user AND for editing a user.  PROVIDED - students do not need to change it.
+
+  It uses the model attribute "user".
+    - user.id is empty  -> the form creates a new user   (POST /users)
+    - user.id has value -> the form updates that user    (POST /users/{id})
+  th:field   = connects an input to a field of the user (value + name)
+  th:errors  = shows the validation message for a field
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page">
+    <h1 th:text="${user.id == null} ? 'Add user' : 'Edit user'">User</h1>
+
+    <form th:object="${user}"
+          th:action="${user.id == null} ? @{/users} : @{/users/{id}(id=${user.id})}"
+          method="post">
+
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" th:field="*{firstName}">
+        <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">error</div>
+
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" th:field="*{lastName}">
+        <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">error</div>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" th:field="*{email}">
+        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error</div>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" th:field="*{age}">
+        <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error</div>
+
+        <div class="buttons">
+            <button type="submit">Save</button>
+            <a class="button secondary" th:href="@{/users}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
