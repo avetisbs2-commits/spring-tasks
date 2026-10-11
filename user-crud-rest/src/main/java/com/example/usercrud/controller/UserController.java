@@ -41,8 +41,8 @@ public class UserController {
         // TODO:
         // 1. Save the user with userRepository.save(...)
         // 2. Return status 201 (HttpStatus.CREATED) with the saved user in the body.
-
-        return notImplemented(); // TEMPORARY - delete this line
+        User savedUser = userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     // ------------------------------------------------------------------
@@ -53,8 +53,8 @@ public class UserController {
         // TODO:
         // 1. Get all users with userRepository.findAll()
         // 2. Return them with status 200 (ResponseEntity.ok(...)).
-
-        return notImplemented(); // TEMPORARY - delete this line
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 
     // ------------------------------------------------------------------
@@ -66,8 +66,9 @@ public class UserController {
         // 1. Find the user with userRepository.findById(id)
         // 2. If it exists, return it with status 200.
         // 3. If it does not exist, return status 404 (ResponseEntity.notFound().build()).
-
-        return notImplemented(); // TEMPORARY - delete this line
+        return userRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // ------------------------------------------------------------------
@@ -80,8 +81,12 @@ public class UserController {
         // 2. Put the id from the URL into newData: newData.setId(id)
         // 3. Save newData with userRepository.save(...)
         // 4. Return the saved user with status 200.
-
-        return notImplemented(); // TEMPORARY - delete this line
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        newData.setId(id);
+        User updatedUser = userRepository.save(newData);
+        return ResponseEntity.ok(updatedUser);
     }
 
     // ------------------------------------------------------------------
@@ -93,8 +98,11 @@ public class UserController {
         // 1. If the user does not exist, return 404.
         // 2. Delete it with userRepository.deleteById(id)
         // 3. Return status 204 (ResponseEntity.noContent().build()).
-
-        return notImplemented(); // TEMPORARY - delete this line
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     // PROVIDED - the temporary answer used above. Delete it with the TEMPORARY lines if you want.
