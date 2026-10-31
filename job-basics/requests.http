@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8083
-@jobId = replace-with-id-from-post-response
+@jobId = 5dbd6772-dd60-49af-b876-8d681a8f233c
 
 ### Complete recurring example: call now, then again after 10 seconds
 GET {{baseUrl}}/api/examples/heartbeat
