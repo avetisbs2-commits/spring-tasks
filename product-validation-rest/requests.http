@@ -1,0 +1,51 @@
+### Run after implementing the TODOs. Copy the id returned by request 1 into @productId.
+@baseUrl = http://localhost:8082/api/products
+@productId = 1
+
+### Complete example: expect 200 with total 37.50
+POST http://localhost:8082/api/examples/order-previews
+Content-Type: application/json
+
+{"quantity":3,"unitPrice":12.50}
+
+### Complete example: expect 400 with errors.quantity and errors.unitPrice
+POST http://localhost:8082/api/examples/order-previews
+Content-Type: application/json
+
+{"quantity":0,"unitPrice":-1}
+
+### 1. Create: expect 201, Location, response DTO
+POST {{baseUrl}}
+Content-Type: application/json
+
+{"name":"Notebook","sku":"BOOK-101","price":12.50,"category":"Stationery"}
+
+### 2. Duplicate SKU: expect 409
+POST {{baseUrl}}
+Content-Type: application/json
+
+{"name":"Another notebook","sku":"book-101","price":15,"category":"Stationery"}
+
+### 3. Invalid body: expect 400 with errors for name, sku, price, category
+POST {{baseUrl}}
+Content-Type: application/json
+
+{"name":"","sku":"bad sku","price":0,"category":""}
+
+### 4. Filter: expect 200 and an array
+GET {{baseUrl}}?category=stationery&minPrice=10&maxPrice=20
+
+### 5. Invalid filter: expect 400
+GET {{baseUrl}}?minPrice=20&maxPrice=10
+
+### 6. Read one: expect 200 (change @productId if needed)
+GET {{baseUrl}}/{{productId}}
+
+### 7. Update: expect 200
+PUT {{baseUrl}}/{{productId}}
+Content-Type: application/json
+
+{"name":"Large notebook","sku":"BOOK-101","price":18.75,"category":"Stationery"}
+
+### 8. Delete: expect 204; repeat for 404
+DELETE {{baseUrl}}/{{productId}}

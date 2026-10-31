@@ -29,9 +29,19 @@ spring_tasks/
 │   ├── pom.xml
 │   ├── requests.http
 │   └── src/
-└── user-crud-mvc/
+├── user-crud-mvc/
+│   ├── README.md
+│   ├── pom.xml
+│   └── src/
+├── product-validation-rest/
+│   ├── README.md
+│   ├── pom.xml
+│   ├── requests.http
+│   └── src/
+└── job-basics/
     ├── README.md
     ├── pom.xml
+    ├── requests.http
     └── src/
 ```
 
@@ -40,9 +50,11 @@ spring_tasks/
 ```text
 user-crud-rest   - simple CRUD for User: REST API (JSON) + Hibernate + PostgreSQL   (port 8080)
 user-crud-mvc    - simple CRUD for User: Spring MVC + Thymeleaf pages + Hibernate + PostgreSQL   (port 8081)
+product-validation-rest - product API: DTOs, validation, filtering, layers, HTTP responses (port 8082)
+job-basics      - one-time jobs, job status, and a recurring scheduler example (port 8083)
 ```
 
-Both modules use the same `user_crud` database and the same `users` table.
+The two user modules use the same `user_crud` database and `users` table. The product module uses a separate `product_catalog` database. The jobs module stores state in memory and needs no database.
 
 ## What You Need
 
@@ -59,7 +71,7 @@ Both modules use the same `user_crud` database and the same `users` table.
 ## Start A Module From The Terminal
 
 ```bash
-cd user-crud-rest      # or user-crud-mvc
+cd job-basics      # or another module
 mvn spring-boot:run
 ```
 
@@ -70,6 +82,8 @@ From `spring_tasks`:
 ```bash
 mvn test
 ```
+
+Tests for student tasks are intentionally red until their TODOs are completed.
 
 ## Notes
 

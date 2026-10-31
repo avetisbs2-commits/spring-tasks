@@ -19,6 +19,8 @@
     <modules>
         <module>user-crud-rest</module>
         <module>user-crud-mvc</module>
+        <module>product-validation-rest</module>
+        <module>job-basics</module>
     </modules>
 
     <properties>
