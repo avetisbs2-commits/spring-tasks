@@ -43,25 +43,30 @@ public class ProductController {
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice) {
         // TODO: return 200 with the filtered list (including [] when empty).
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+
+        List<ProductResponse> list = productService.list(category, minPrice,  maxPrice);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> get(@PathVariable Long id) {
         // TODO: return 200 with the product; the advice handles missing products.
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        ProductResponse product = productService.get(id);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> update(@PathVariable Long id,
-                                                   @RequestBody ProductRequest request) {
+                                                  @Valid  @RequestBody ProductRequest request) {
         // TODO: add @Valid; call service; return 200 with the updated product.
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        ProductResponse product = productService.update(id , request);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         // TODO: call service; return 204 with no body.
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        productService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

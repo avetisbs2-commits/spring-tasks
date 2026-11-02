@@ -31,13 +31,17 @@ public class ApiExceptionHandler {
     @ExceptionHandler(InvalidFilterException.class)
     public ResponseEntity<ProblemDetail> invalidFilter(InvalidFilterException exception) {
         // TODO: 400 ProblemDetail; use exception.getMessage() as detail.
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ProblemDetail> missingProduct(ProductNotFoundException exception) {
         // TODO: 404 ProblemDetail; use exception.getMessage() as detail.
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problem);
     }
 
     @ExceptionHandler(DuplicateSkuException.class)
