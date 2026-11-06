@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8084
+
+### Complete example: normal parcel (DEBUG + INFO in the console)
+GET {{baseUrl}}/api/examples/shipping-quote?weightKg=3
+
+### Complete example: heavy parcel (also a WARN)
+GET {{baseUrl}}/api/examples/shipping-quote?weightKg=40
+
+### Approved payment, with your own correlation id (expect INFO)
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+X-Correlation-Id: demo-1
+
+{"customerEmail":"anna.petrosyan@example.com","cardNumber":"4111111111111111","amount":250.00,"currency":"AMD"}
+
+### Declined payment, over the limit (expect WARN)
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+
+{"customerEmail":"anna.petrosyan@example.com","cardNumber":"4111111111111111","amount":5000,"currency":"AMD"}
+
+### Provider outage: card ending with 0000 (expect 502 and one ERROR with a stack trace)
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+
+{"customerEmail":"anna.petrosyan@example.com","cardNumber":"4111111111110000","amount":250.00,"currency":"AMD"}
+
+### Invalid body (expect 400 and a WARN with field names only)
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+
+{"customerEmail":"not-an-email","cardNumber":"123","amount":0,"currency":"amd"}

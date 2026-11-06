@@ -21,6 +21,7 @@
         <module>user-crud-mvc</module>
         <module>product-validation-rest</module>
         <module>job-basics</module>
+        <module>logging-basics</module>
     </modules>
 
     <properties>

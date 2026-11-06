@@ -15,6 +15,8 @@ service layer
 exceptions
 DTOs
 relationships
+background jobs
+logging
 ```
 
 ## Project Structure
@@ -38,7 +40,12 @@ spring_tasks/
 │   ├── pom.xml
 │   ├── requests.http
 │   └── src/
-└── job-basics/
+├── job-basics/
+│   ├── README.md
+│   ├── pom.xml
+│   ├── requests.http
+│   └── src/
+└── logging-basics/
     ├── README.md
     ├── pom.xml
     ├── requests.http
@@ -52,9 +59,10 @@ user-crud-rest   - simple CRUD for User: REST API (JSON) + Hibernate + PostgreSQ
 user-crud-mvc    - simple CRUD for User: Spring MVC + Thymeleaf pages + Hibernate + PostgreSQL   (port 8081)
 product-validation-rest - product API: DTOs, validation, filtering, layers, HTTP responses (port 8082)
 job-basics      - one-time jobs, job status, and a recurring scheduler example (port 8083)
+logging-basics  - SLF4J + Logback: log levels, parameterized messages, MDC correlation ids, masking, JSON logs (port 8084)
 ```
 
-The two user modules use the same `user_crud` database and `users` table. The product module uses a separate `product_catalog` database. The jobs module stores state in memory and needs no database.
+The two user modules use the same `user_crud` database and `users` table. The product module uses a separate `product_catalog` database. The jobs and logging modules store state in memory and need no database.
 
 ## What You Need
 
