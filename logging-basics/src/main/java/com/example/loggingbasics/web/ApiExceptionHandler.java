@@ -39,6 +39,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<ProblemDetail> gatewayFailure(PaymentGatewayException exception) {
         // TODO (ERROR): log "Payment provider call failed" and pass the exception as the
         // last argument, so Logback prints the stack trace and its cause.
+        log.error("Payment provider call failed", exception);
 
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_GATEWAY, "Payment provider is unavailable, please try again later");
