@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8085
+@token = paste-accessToken-from-login-response
+
+### Complete public endpoint: 200
+GET {{baseUrl}}/api/public
+
+### Protected endpoint without token: 401
+GET {{baseUrl}}/api/me
+
+### Student login task: 200 with tokenType, accessToken, expiresIn
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"student","password":"learn-jwt"}
+
+### Wrong password: 401
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"username":"student","password":"wrong"}
+
+### Paste accessToken from login above into @token, then expect 200
+GET {{baseUrl}}/api/me
+Authorization: Bearer {{token}}
+
+### Student token has USER role, so expect 403
+GET {{baseUrl}}/api/admin
+Authorization: Bearer {{token}}
+
+### Login as admin / learn-admin, paste its token, then expect 200
+GET {{baseUrl}}/api/admin
+Authorization: Bearer {{token}}

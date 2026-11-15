@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OAuth2 login lesson</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>Sign in with GitHub</h1>
+    <p>This app lets GitHub identify you. It does not ask for your GitHub password.</p>
+    <a class="button" th:href="@{/oauth2/authorization/github}">Continue with GitHub</a>
+    <p>After login, the protected profile page shows a few GitHub account fields.</p>
+</main>
+</body>
+</html>

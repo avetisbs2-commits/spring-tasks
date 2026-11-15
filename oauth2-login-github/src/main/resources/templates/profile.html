@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your GitHub profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>Signed in</h1>
+    <p>Welcome, <strong th:text="${profile.displayName}">Name</strong>.</p>
+    <dl>
+        <dt>GitHub ID</dt><dd th:text="${profile.githubId}">123</dd>
+        <dt>Login</dt><dd th:text="${profile.login}">octocat</dd>
+    </dl>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Sign out</button>
+    </form>
+</main>
+</body>
+</html>

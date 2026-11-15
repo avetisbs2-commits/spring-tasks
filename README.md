@@ -17,12 +17,14 @@ DTOs
 relationships
 background jobs
 logging
+JWT authentication
+OAuth2 login
 ```
 
 ## Project Structure
 
 ```text
-spring_tasks/
+spring-tasks/
 ├── README.md
 ├── pom.xml
 ├── .gitignore
@@ -45,10 +47,20 @@ spring_tasks/
 │   ├── pom.xml
 │   ├── requests.http
 │   └── src/
-└── logging-basics/
+├── logging-basics/
+│   ├── README.md
+│   ├── pom.xml
+│   ├── requests.http
+│   └── src/
+├── jwt-basics/
+│   ├── README.md
+│   ├── pom.xml
+│   ├── requests.http
+│   └── src/
+└── oauth2-login-github/
     ├── README.md
+    ├── TODO.md
     ├── pom.xml
-    ├── requests.http
     └── src/
 ```
 
@@ -60,9 +72,11 @@ user-crud-mvc    - simple CRUD for User: Spring MVC + Thymeleaf pages + Hibernat
 product-validation-rest - product API: DTOs, validation, filtering, layers, HTTP responses (port 8082)
 job-basics      - one-time jobs, job status, and a recurring scheduler example (port 8083)
 logging-basics  - SLF4J + Logback: log levels, parameterized messages, MDC correlation ids, masking, JSON logs (port 8084)
+jwt-basics      - login, signed JWTs, bearer requests, and protected endpoints (port 8085)
+oauth2-login-github - browser login with GitHub, callback, session, and profile page (port 8086)
 ```
 
-The two user modules use the same `user_crud` database and `users` table. The product module uses a separate `product_catalog` database. The jobs and logging modules store state in memory and need no database.
+The two user modules use the same `user_crud` database and `users` table. The product module uses a separate `product_catalog` database. The jobs, logging, JWT, and GitHub login modules need no database.
 
 ## What You Need
 
