@@ -19,6 +19,10 @@ public class SecurityConfig {
         // Keep CSRF enabled: this browser app uses a session and a POST logout form.
         // Hint: http.oauth2Login(oauth -> oauth.defaultSuccessUrl("/profile", true));
 
+        http.oauth2Login(oauth ->
+                oauth.defaultSuccessUrl("/profile", true)
+        );
+
         return http.build();
     }
 }
